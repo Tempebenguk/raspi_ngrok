@@ -6,13 +6,11 @@ echo "     NGROK + FIREBASE AUTO INSTALLER      "
 echo "=========================================="
 echo
 
-# ---------- CONFIGURASI ----------
-NGROK_AUTHTOKEN="2hiWLISZVB1Q0d4z4jnWXY8r2C0_sBPKbU4Qndy4WQQB1hTY"
-FIREBASE_URL="https://iot-dts-vsga-default-rtdb.asia-southeast1.firebasedatabase.app/ngrok.json"
+NGROK_AUTHTOKEN="AUTHTOKEN_NGROK"
+FIREBASE_URL="https://firebase.firebasedatabase.app/ngrok.json"
 PYTHON_SCRIPT_PATH="/home/pi/ngrok_reporter.py"
 SERVICE_PATH="/etc/systemd/system/ngrok-ssh.service"
 USER_HOME="/home/pi"
-# --------------------------------
 
 if [ -z "$NGROK_AUTHTOKEN" ]; then
   echo "ERROR: Authtoken kosong!"
@@ -21,7 +19,6 @@ fi
 
 echo "[1/6] Menginstall dependencies..."
 sudo apt update
-sudo apt install -y python3 python3-pip wget unzip
 
 echo "[2/6] Menginstall ngrok..."
 wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip -O ngrok.zip
@@ -39,7 +36,7 @@ cat <<EOF > $PYTHON_SCRIPT_PATH
 import os, time, json, requests
 from datetime import datetime
 
-DEVICE_ID = os.uname()[1]
+DEVICE_ID = "id_device_pi"
 FIREBASE_URL = "$FIREBASE_URL"
 
 def get_ngrok_url():
@@ -101,14 +98,9 @@ EOF
 echo "[6/6] Mengaktifkan service systemd..."
 sudo systemctl daemon-reload
 sudo systemctl enable ngrok-ssh
+sudo systemctl start ngrok-ssh
 
 echo
 echo "=========================================="
 echo "   INSTALASI SELESAI!"
-echo "   Service akan aktif setelah reboot."
 echo "=========================================="
-echo
-echo "Jalankan:"
-echo "   sudo systemctl start ngrok-ssh"
-echo "Untuk memulai sekarang, atau reboot."
-echo
