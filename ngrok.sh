@@ -14,9 +14,8 @@ SERVICE_PATH="/etc/systemd/system/ngrok-ssh.service"
 USER_HOME="/home/pi"
 # --------------------------------
 
-if [ "$NGROK_AUTHTOKEN" = "2hiWLISZVB1Q0d4z4jnWXY8r2C0_sBPKbU4Qndy4WQQB1hTY" ]; then
-  echo "ERROR: Authtoken belum diisi!"
-  echo "Edit file ini dan masukkan authtoken ngrok Anda."
+if [ -z "$NGROK_AUTHTOKEN" ]; then
+  echo "ERROR: Authtoken kosong!"
   exit 1
 fi
 
