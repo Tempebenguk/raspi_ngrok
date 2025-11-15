@@ -6,6 +6,7 @@ echo "     NGROK + FIREBASE AUTO INSTALLER      "
 echo "=========================================="
 echo
 
+ID_DEVICE_PI="id_device_pi"
 NGROK_AUTHTOKEN="AUTHTOKEN_NGROK"
 FIREBASE_URL="https://firebase.firebasedatabase.app/ngrok.json"
 PYTHON_SCRIPT_PATH="/home/pi/ngrok_reporter.py"
@@ -36,7 +37,7 @@ cat <<EOF > $PYTHON_SCRIPT_PATH
 import os, time, json, requests
 from datetime import datetime
 
-DEVICE_ID = "id_device_pi"
+DEVICE_ID = "$ID_DEVICE_PI"
 FIREBASE_URL = "$FIREBASE_URL"
 
 def get_ngrok_url():
