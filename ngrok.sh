@@ -6,8 +6,6 @@ echo "     NGROK + FIREBASE AUTO INSTALLER      "
 echo "=========================================="
 echo
 
-ENV_FILE="/home/pi/.env"
-
 echo "[0/7] Mengumpulkan input user..."
 
 # USER INPUT
@@ -18,6 +16,7 @@ read -p "Masukkan USERNAME untuk service (default: pi): " SERVICE_USER
 SERVICE_USER=${SERVICE_USER:-pi}
 
 USER_HOME="/home/$SERVICE_USER"
+ENV_FILE="$USER_HOME/.env"
 PYTHON_SCRIPT_PATH="$USER_HOME/ngrok_reporter.py"
 SERVICE_PATH="/etc/systemd/system/ngrok-ssh.service"
 
