@@ -59,7 +59,7 @@ sudo chmod +x /usr/local/bin/ngrok
 rm ngrok.zip
 
 echo "[4/7] Set NGROK Authtoken..."
-ngrok ngrok authtoken $NGROK_AUTHTOKEN
+ngrok authtoken $NGROK_AUTHTOKEN
 
 # WRITE PYTHON SCRIPT
 echo "[5/7] Membuat script Python reporter..."
